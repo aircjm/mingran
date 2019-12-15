@@ -1,0 +1,11 @@
+{
+   "configurations": [
+      {
+         "type": "java",
+         "name": "CodeLens (Launch) - MingranJavaServerApplication",
+         "request": "launch",
+         "mainClass": "com.aircjm.mingran.java.server.MingranJavaServerApplication",
+         "projectName": "mingran-java-server"
+      }
+   ]
+}

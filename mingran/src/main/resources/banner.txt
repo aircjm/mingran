@@ -1,0 +1,4 @@
+Application Version: ${ruoyi.version}
+Spring Boot Version: ${spring-boot.version}
+
+开始启动项目
