@@ -22,6 +22,12 @@ docker run --name mingran-redis  -p 6379:6379 -d redis:5.0.7-alpine
 ```
 
 
+### 本地启动
+```java
+
+```
+
+
 
 ### 代码自动生成
 自动生成代码其实蛮有意思的，后面研究下，减少crud的工作量其实蛮好的

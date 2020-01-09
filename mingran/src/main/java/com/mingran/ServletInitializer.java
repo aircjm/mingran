@@ -7,12 +7,13 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
  * web容器中进行部署
  * 
  *
+ * @author aircjm
  */
-public class RuoYiServletInitializer extends SpringBootServletInitializer
+public class ServletInitializer extends SpringBootServletInitializer
 {
     @Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder application)
     {
-        return application.sources(RuoYiApplication.class);
+        return application.sources(Application.class);
     }
 }

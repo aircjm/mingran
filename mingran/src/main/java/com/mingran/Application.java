@@ -6,12 +6,14 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 
 /**
  * 启动程序
+ *
+ * @author aircjm
  */
 @SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
-public class RuoYiApplication {
+public class Application {
     public static void main(String[] args) {
         // System.setProperty("spring.devtools.restart.enabled", "false");
-        SpringApplication.run(RuoYiApplication.class, args);
-        System.out.println("-----------------------------------项目启动成功----------------------------------");
+        SpringApplication.run(Application.class, args);
+        System.out.println("-----------------------------------Mingran 项目启动成功----------------------------------");
     }
 }
