@@ -1,3 +1,4 @@
 rootProject.name = 'mingran'
 
-include 'mingran', 'mingran-ui-vue', 'dice-server'
+include 'mingran'
+inclue 'mingran-ui-vue'
