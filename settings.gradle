@@ -1,4 +1,4 @@
 rootProject.name = 'mingran'
 
 include 'mingran'
-inclue 'mingran-ui-vue'
+include 'mingran-ui-vue'
