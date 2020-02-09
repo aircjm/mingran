@@ -90,6 +90,12 @@ export const constantRoutes = [
         component: () => import('@/views/blog/blogAdd.vue'),
         name: 'blogAdd',
         meta: { title: 'blogAdd', icon: 'user' }
+      },
+      {
+        path: 'writer',
+        component: () => import('@/views/blog/writer.vue'),
+        name: 'writer',
+        meta: { title: 'writer', icon: 'user' }
       }
     ]
   },
