@@ -6,9 +6,14 @@ function resolve(dir) {
   return path.join(__dirname, dir)
 }
 
-const name = defaultSettings.title || 'Mingran管理系统' // 标题
+const name = defaultSettings.title || 'Mingran Admin' // 标题
 
-const port = process.env.port || process.env.npm_config_port || 80 // 端口
+// If your port is set to 80,
+// use administrator privileges to execute the command line.
+// For example, Mac: sudo npm run
+// You can change the port by the following method:
+// port = 9527 npm run dev OR npm run dev --port = 9527
+const port = process.env.port || process.env.npm_config_port || 8010 // dev port
 
 // vue.config.js 配置说明
 //官方vue.config.js 参考文档 https://cli.vuejs.org/zh/config/#css-loaderoptions
@@ -17,7 +22,14 @@ module.exports = {
   // 部署生产环境和开发环境下的URL。
   // 默认情况下，Vue CLI 会假设你的应用是被部署在一个域名的根路径上
   // 例如 https://www.ruoyi.vip/。如果应用被部署在一个子路径上，你就需要用这个选项指定这个子路径。例如，如果你的应用被部署在 https://www.ruoyi.vip/admin/，则设置 baseUrl 为 /admin/。
-  publicPath: process.env.NODE_ENV === "production" ? "/" : "/",
+  /**
+   * You will need to set publicPath if you plan to deploy your site under a sub path,
+   * for example GitHub Pages. If you plan to deploy your site to https://foo.github.io/bar/,
+   * then publicPath should be set to "/bar/".
+   * In most cases please use '/' !!!
+   * Detail: https://cli.vuejs.org/config/#publicpath
+   */
+  publicPath: '/admin',
   // 在npm run build 或 yarn build 时 ，生成文件的目录名称（要和baseUrl的生产环境路径一致）（默认dist）
   outputDir: 'dist',
   // 用于放置生成的静态资源 (js、css、img、fonts) 的；（项目打包之后，静态资源会放在这个文件夹下）
@@ -43,6 +55,8 @@ module.exports = {
     disableHostCheck: true
   },
   configureWebpack: {
+    // provide the app's title in webpack's name field, so that
+    // it can be accessed in index.html to inject the correct title.
     name: name,
     resolve: {
       alias: {
