@@ -49,6 +49,7 @@ import "quill/dist/quill.snow.css";
 import "quill/dist/quill.bubble.css";
 
 export default {
+  name: "QEditor",
   props: {
     /* 编辑器的内容 */
     value: {

@@ -80,6 +80,20 @@ export const constantRoutes = [
     ]
   },
   {
+    path: '/blog',
+    component: Layout,
+    hidden: true,
+    redirect: 'noredirect',
+    children: [
+      {
+        path: 'add',
+        component: () => import('@/views/blog/blogAdd.vue'),
+        name: 'blogAdd',
+        meta: { title: 'blogAdd', icon: 'user' }
+      }
+    ]
+  },
+  {
     path: '/dict',
     component: Layout,
     hidden: true,
