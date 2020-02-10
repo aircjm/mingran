@@ -3,16 +3,18 @@
     <div class="top">
       <el-input type="text" class="title" placeholder="输入文章标题" v-model="title" maxlength="100" show-word-limit></el-input>
       <span class="btn">
-                <el-button type="primary" class="publish" @click="publish" plain>发表文章</el-button>
-                <el-dropdown placement="bottom-start" @command="handleCommand">
-                    <img class="head_img" :src="imgUrl" />
-                    <el-dropdown-menu slot="dropdown">
-                        <el-dropdown-item icon="icon-vue-mine" :command="`/${this.account}/${this.uid}/index?`">我的主页</el-dropdown-item>
-                        <el-dropdown-item icon="icon-vue-index" command='/home'>首页</el-dropdown-item>
-                        <el-dropdown-item icon="icon-vue-exit1" style="margin-left:2px;" command="exit">退出</el-dropdown-item>
-                    </el-dropdown-menu>
-                </el-dropdown>
-            </span>
+        <el-button type="primary" class="publish" @click="publish" plain>发表文章</el-button>
+        <el-dropdown placement="bottom-start" @command="handleCommand">
+            <img class="head_img" :src="imgUrl"/>
+            <el-dropdown-menu slot="dropdown">
+                <el-dropdown-item icon="icon-vue-mine"
+                                  :command="`/${this.account}/${this.uid}/index?`">我的主页</el-dropdown-item>
+                <el-dropdown-item icon="icon-vue-index" command='/home'>首页</el-dropdown-item>
+                <el-dropdown-item icon="icon-vue-exit1" style="margin-left:2px;"
+                                  command="exit">退出</el-dropdown-item>
+            </el-dropdown-menu>
+        </el-dropdown>
+      </span>
     </div>
     <el-dialog title="发布文章" :visible.sync="showDialog" :width="width">
       <el-form>
