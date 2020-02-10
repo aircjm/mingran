@@ -20,7 +20,7 @@ task
 ### 初始化
 
 ```bash
-docker run -it --name mysql -p 3306:3306 -v /d/dockerDrive/mysql:/app -e MYSQL_DATABASE=mingran -e MYSQL_USER=chenran -e MYSQL_PASSWORD=chenran123456 -e MYSQL_ROOT_PASSWORD=111111 wangxian/alpine-mysql
+docker run -it --name mingran-mysql -p 3306:3306 -v /d/dockerDrive/mysql:/app -e MYSQL_DATABASE=mingran -e MYSQL_USER=chenran -e MYSQL_PASSWORD=chenran123456 -e MYSQL_ROOT_PASSWORD=111111 wangxian/alpine-mysql
 ```
 
 ```bash
