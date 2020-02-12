@@ -11,7 +11,7 @@ import com.mingran.common.exception.file.InvalidExtensionException;
 import com.mingran.common.utils.DateUtils;
 import com.mingran.common.utils.StringUtils;
 import com.mingran.common.utils.security.Md5Utils;
-import com.mingran.framework.config.RuoYiConfig;
+import com.mingran.framework.config.ProjectConfig;
 
 /**
  * 文件上传工具类
@@ -33,7 +33,7 @@ public class FileUploadUtils
     /**
      * 默认上传的地址
      */
-    private static String defaultBaseDir = RuoYiConfig.getProfile();
+    private static String defaultBaseDir = ProjectConfig.getProfile();
 
     private static int counter = 0;
 
@@ -146,7 +146,7 @@ public class FileUploadUtils
 
     private static final String getPathFileName(String uploadDir, String fileName) throws IOException
     {
-        int dirLastIndex = RuoYiConfig.getProfile().length() + 1;
+        int dirLastIndex = ProjectConfig.getProfile().length() + 1;
         String currentDir = StringUtils.substring(uploadDir, dirLastIndex);
         String pathFileName = Constants.RESOURCE_PREFIX + "/" + currentDir + "/" + fileName;
         return pathFileName;

@@ -30,7 +30,7 @@ public class SwaggerConfig
 {
     /** 系统基础配置 */
     @Autowired
-    private RuoYiConfig ruoyiConfig;
+    private ProjectConfig ruoyiConfig;
 
     /**
      * 创建API

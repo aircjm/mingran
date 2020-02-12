@@ -15,7 +15,7 @@ import com.mingran.common.utils.ServletUtils;
 import com.mingran.common.utils.file.FileUploadUtils;
 import com.mingran.framework.aspectj.lang.annotation.Log;
 import com.mingran.framework.aspectj.lang.enums.BusinessType;
-import com.mingran.framework.config.RuoYiConfig;
+import com.mingran.framework.config.ProjectConfig;
 import com.mingran.framework.security.LoginUser;
 import com.mingran.framework.security.service.TokenService;
 import com.mingran.framework.web.controller.BaseController;
@@ -93,7 +93,7 @@ public class SysProfileController extends BaseController
         if (!file.isEmpty())
         {
             LoginUser loginUser = tokenService.getLoginUser(ServletUtils.getRequest());
-            String avatar = FileUploadUtils.upload(RuoYiConfig.getAvatarPath(), file);
+            String avatar = FileUploadUtils.upload(ProjectConfig.getAvatarPath(), file);
             if (userService.updateUserAvatar(loginUser.getUsername(), avatar))
             {
                 AjaxResult ajax = AjaxResult.success();

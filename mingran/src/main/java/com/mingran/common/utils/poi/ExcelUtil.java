@@ -43,7 +43,7 @@ import com.mingran.framework.aspectj.lang.annotation.Excel;
 import com.mingran.framework.aspectj.lang.annotation.Excel.ColumnType;
 import com.mingran.framework.aspectj.lang.annotation.Excel.Type;
 import com.mingran.framework.aspectj.lang.annotation.Excels;
-import com.mingran.framework.config.RuoYiConfig;
+import com.mingran.framework.config.ProjectConfig;
 import com.mingran.framework.web.domain.AjaxResult;
 import com.mingran.common.core.text.Convert;
 import com.mingran.common.exception.CustomException;
@@ -680,7 +680,7 @@ public class ExcelUtil<T>
      */
     public String getAbsoluteFile(String filename)
     {
-        String downloadPath = RuoYiConfig.getDownloadPath() + filename;
+        String downloadPath = ProjectConfig.getDownloadPath() + filename;
         File desc = new File(downloadPath);
         if (!desc.getParentFile().exists())
         {
