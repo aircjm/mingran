@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 /**
  * 读取项目相关配置
  *
- * @author chenjiaming
+ * @author aircjm
  */
 @Component
 @ConfigurationProperties(prefix = "mingran")
