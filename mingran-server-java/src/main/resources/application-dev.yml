@@ -1,0 +1,22 @@
+#datasource
+spring:
+  datasource:
+    druid:
+      stat-view-servlet:
+        loginUsername: admin
+        loginPassword: 123456
+    dynamic:
+      primary: master
+      datasource:
+        master:
+          username: root
+          password: 111111
+          url: jdbc:mysql://localhost:3306/mingran?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai
+          driver-class-name: com.mysql.cj.jdbc.Driver
+
+logging:
+  level:
+    root: info
+    com.aircjm.mingran.mapper: trace
+
+

@@ -1,0 +1,4 @@
+${AnsiColor.BLUE}
+${AnsiColor.BRIGHT_YELLOW}
+::: Spring-Boot ${spring-boot.version}
+::: App (version:${application.formatted-version})
