@@ -12,7 +12,7 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 @SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
 public class Application {
     public static void main(String[] args) {
-        // System.setProperty("spring.devtools.restart.enabled", "false");
+         System.setProperty("spring.devtools.restart.enabled", "false");
         SpringApplication.run(Application.class, args);
         System.out.println("-----------------------------------Mingran 项目启动成功----------------------------------");
     }

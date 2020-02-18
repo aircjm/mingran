@@ -1,41 +1,36 @@
 <template>
   <div>
-    <div class="top">
+    <div>
       <el-input type="text" class="title" placeholder="输入文章标题" v-model="title" maxlength="100" show-word-limit></el-input>
       <span class="btn">
         <!--点击发布，触发发布文章确认弹框-->
-        <el-button type="primary" class="publish" @click="publish" plain>发表文章</el-button>
-        <!--<el-dropdown placement="bottom-start" @command="handleCommand">
-            <img class="head_img" :src="imgUrl"/>
-            <el-dropdown-menu slot="dropdown">
-                <el-dropdown-item icon="icon-vue-mine"
-                                  :command="`/${this.account}/${this.uid}/index?`">我的主页</el-dropdown-item>
-                <el-dropdown-item icon="icon-vue-index" command='/home'>首页</el-dropdown-item>
-                <el-dropdown-item icon="icon-vue-exit1" style="margin-left:2px;"
-                                  command="exit">退出</el-dropdown-item>
-            </el-dropdown-menu>
-        </el-dropdown>-->
+        <el-button type="primary" class="publish" @click="publish" plain>开始发表文章</el-button>
       </span>
     </div>
+    <textarea id="content"></textarea>
+
+
     <!--发布文章确认弹框-->
     <el-dialog title="发布文章" :visible.sync="showDialog" :width="width">
       <el-form>
+
         <el-form-item>
           <span class="input-span">文章标签：</span>
           <el-tag :key="tag" v-for="tag in tags" closable @close="closeTag(tag)">{{tag}}</el-tag>
           <el-input class="input-new-tag" v-if="tagInputVisible" v-model="tagValue" @keyup.native="fitTagWidth" v-bind:style="{width:tagLen + 'px'}" ref="saveTagInput" size="small" @keyup.enter.native="handleTagConfirm" @blur="handleTagConfirm"></el-input>
-          <el-button v-else class="button-new-tag" icon="icon-vue-add" size="small" plain @click="showInputTag"><span style="color:#666666;font-size:14px;">添加标签</span></el-button>
+          <el-button v-else class="button-new-tag" icon="icon-vue-add" size="small" plain @click="showInputTag"><span style="color:blue;font-size:14px;">添加标签</span></el-button>
         </el-form-item>
+
         <el-form-item>
           <span class="input-span">个人分类：</span>
           <el-tag :key="category" v-for="category in categorys" closable @close="closeCategory(category)">{{category}}</el-tag>
           <el-input class="input-new-tag" v-if="categoryInputVisible" v-model="categoryValue" @keyup.native="fitCategoryWidth" v-bind:style="{width:categoryLen + 'px'}" ref="saveTagInput" size="small" @keyup.enter.native="handleCategoryConfirm" @blur="handleCategoryConfirm"></el-input>
           <el-button v-else class="button-new-tag" icon="icon-vue-add" size="small" plain @click="showInputCategory"><span style="color:#666666;font-size:14px;">添加个人分类</span></el-button>
-          <section class="infinite-list category" style="overflow:auto">
+          <!--<section class="infinite-list category" style="overflow:auto">
             <el-checkbox-group v-model="checkedList" style="margin-left:10px">
               <el-checkbox :key="index" v-for="(category, index) in categoryList" :label="category">{{category}}</el-checkbox>
             </el-checkbox-group>
-          </section>
+          </section>-->
         </el-form-item>
         <section>
           <span class="input-span">发布形式：</span>
@@ -45,10 +40,10 @@
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button @click="showDialog = false" size="small">取 消</el-button>
-        <el-button type="success" @click="finshPublish">发布文章</el-button>
+        <el-button type="success" @click="finshPublish">确认发布文章</el-button>
       </div>
     </el-dialog>
-    <textarea id="content"></textarea>
+
   </div>
 </template>
 <script>
@@ -67,6 +62,7 @@
   import 'prismjs/components/prism-git'
   import 'prismjs/components/prism-json'
   import 'prismjs/components/prism-sql'
+  import {pageSave} from "@/api/blog/blog";
 
   export default {
     data () {
@@ -292,8 +288,8 @@
       publish () {
         if (this.title === '') {
           this.tip('标题不能为空', 'warning')
-        } else if (this.content.length < 70) {
-          this.tip('文章内容不能少于70字', 'warning')
+        } else if (this.content.length === 0) {
+          this.tip('文章内容不能为空', 'warning')
         } else {
           this.getHtml()
           this.showDialog = true
@@ -404,7 +400,7 @@
           background: 'rgba(0, 0, 0, 0.7)'
         })
         let data = {
-          'title': this.title,
+          "title": this.title,
           'contentMd': this.content,
           'contentHtml': this.contentHtml,
           'tags': this.tags,
@@ -413,11 +409,12 @@
           'uid': this.uid,
           'aid': this.aid
         }
-        this.$api.articles.saveArticles(data)
+        pageSave(data)
           .then(res => {
+            debugger;
             loading.close()
             console.log(data)
-            if (res.code === 1) {
+            if (res.code === 0) {
               // 发布成功，删除本地存储
               window.localStorage.removeItem(this.uid)
               this.tip('发布成功', 'success')
@@ -442,7 +439,7 @@
   }
   .title{
     width: 80%;
-    font-size: 38px;
+    font-size: 24px;
     @media screen and (max-width: 1000px){
       width: 60%;
     }

@@ -3,9 +3,16 @@ package com.mingran.project.trello.config;
 import com.julienvey.trello.Trello;
 import com.julienvey.trello.impl.TrelloImpl;
 import com.julienvey.trello.impl.http.ApacheHttpClient;
-import org.springframework.beans.factory.annotation.Value;
+import com.mingran.project.system.domain.SysConfig;
+import com.mingran.project.system.mapper.SysConfigMapper;
+import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
+import javax.annotation.Resource;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * @author aircjm
@@ -13,16 +20,22 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class TrelloBean {
 
-    @Value("${trello.token}")
-    private String token;
-
-    @Value("${trello.apiKey}")
-    private String apiKey;
+    @Resource
+    private SysConfigMapper sysConfigMapper;
 
 
     @Bean
     public Trello getTrelloApi() {
-        return new TrelloImpl(token, apiKey, new ApacheHttpClient());
+        SysConfig sysConfig = new SysConfig();
+        sysConfig.setConfigKey("trello");
+        List<SysConfig> trelloConfig = sysConfigMapper.selectConfigList(sysConfig);
+        if (CollectionUtils.isNotEmpty(trelloConfig)) {
+            Map<String, String> map = trelloConfig.stream().collect(Collectors.toMap(SysConfig::getConfigKey, SysConfig::getConfigValue));
+            return new TrelloImpl(map.get("trello.api.key"), map.get("trello.token"), new ApacheHttpClient());
+        } else {
+            return new TrelloImpl(null, null, new ApacheHttpClient());
+        }
+
     }
 
 
