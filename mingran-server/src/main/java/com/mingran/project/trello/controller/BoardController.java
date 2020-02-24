@@ -18,9 +18,9 @@ import javax.validation.Valid;
  * @author aircjm
  */
 @RestController
-@RequestMapping(value = "/api/card/")
-@Api(value = "CardController", description = "卡片博客API")
-public class CardController {
+@RequestMapping(value = "/api/board/")
+@Api(value = "BoardController", description = "卡片博客API")
+public class BoardController {
 
 
     @Resource
