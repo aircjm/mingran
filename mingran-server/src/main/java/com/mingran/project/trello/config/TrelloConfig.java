@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
  * @author aircjm
  */
 @Configuration
-public class TrelloBean {
+public class TrelloConfig {
 
     @Resource
     private SysConfigMapper sysConfigMapper;

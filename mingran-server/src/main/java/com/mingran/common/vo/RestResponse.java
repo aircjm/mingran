@@ -27,10 +27,13 @@ public class RestResponse<T> {
         return new RestResponse<>(0, "success", null);
     }
 
+    public static RestResponse success(Object data) {
+        return new RestResponse<>(0, "success", data);
+    }
+
 
     public static RestResponse success(int code, String msg, Object data) {
         return new RestResponse<>(code, msg, data);
     }
-
 
 }
