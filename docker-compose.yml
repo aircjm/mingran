@@ -55,7 +55,6 @@ services:
     - ~/.mingran/upload:/root/.mingran/upload
     expose:
     - "8085"
-    command: gradlew bootrun -Dspring.profiles.active=docker
     depends_on:
     - mingran-mysql
     restart: always
