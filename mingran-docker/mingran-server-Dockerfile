@@ -3,6 +3,3 @@ FROM gradle:5.4-jdk8-alpine AS build
 MAINTAINER zzzzbw "zzzzbw@gmail.com"
 
 ENV LANG C.UTF-8
-
-
-CMD ./gradlew clean build bootRun
