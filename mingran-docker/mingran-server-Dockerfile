@@ -6,8 +6,9 @@ WORKDIR /usr/src/app
 COPY ./mingran-server .
 
 RUN ls
+RUN pwd
   # Install the application
-RUN gradle clean bootJar -Dspring.profiles.active=docker
+RUN gradle clean build -Dspring.profiles.active=docker
 RUN pwd
 RUN ls -ltr /usr/src/app/build/libs
 
