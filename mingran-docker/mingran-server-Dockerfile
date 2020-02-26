@@ -1,13 +1,28 @@
 # Start with a base image containing Java runtime
 FROM gradle:jdk10 as builder
 
-COPY --chown=gradle:gradle . /home/gradle/src
-WORKDIR /home/gradle/src
-RUN gradle build
+
+WORKDIR /usr/src/app
+COPY ./mingran-server .
+
+RUN ls
+  # Install the application
+RUN gradle clean bootJar -Dspring.profiles.active=docker
+RUN pwd
+RUN ls -ltr /usr/src/app/build/libs
+
 
 FROM openjdk:10-jre-slim
+ARG APPLICATION_NAME
+ARG VERSION
 
-COPY --from=builder /home/gradle/src/build/lib/mingran-server-*.jar /app.har
+
+COPY --from=appbuild /usr/src/app/build/libs/${APPLICATION_NAME}-${VERSION}.jar /app/${APPLICATION_NAME}-${VERSION}.jar
+
 WORKDIR /app
 
-CMD ["java -jar /app.jar"]
+ENV APPLICATION_NAME=${APPLICATION_NAME}
+
+ENV VERSION=${VERSION}
+
+ENTRYPOINT java $JAVA_OPTS -jar /app/${APPLICATION_NAME}-${VERSION}.jar
