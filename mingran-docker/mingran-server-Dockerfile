@@ -1,10 +1,13 @@
-FROM gradle:5.4-jdk8-alpine AS build
+# Start with a base image containing Java runtime
+FROM gradle:jdk10 as builder
 
-MAINTAINER zzzzbw "zzzzbw@gmail.com"
+COPY --chown=gradle:gradle . /home/gradle/src
+WORKDIR /home/gradle/src
+RUN gradle build
 
-ENV LANG C.UTF-8
+FROM openjdk:10-jre-slim
 
-COPY ./mingran-server .
+COPY --from=builder /home/gradle/src/build/lib/mingran-server-*.jar /app.har
+WORKDIR /app
 
-CMD gradle clean build -Dspring.profiles.active=docker
-ENTRYPOINT java -jar build/libs/mingran-server-*.jar
+CMD ["java -jar /app.jar"]
