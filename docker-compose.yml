@@ -51,11 +51,10 @@ services:
     volumes:
     - ./mingran-server:/app
     - ~/.m2:/root/.m2
-    - ~/.mingran/logs/server:/app/log
+    - ~/.mingran/logs/server:/app/logs
     - ~/.mingran/upload:/root/.mingran/upload
     expose:
     - "8085"
-    command: gradle bootrun -Dspring.profiles.active=docker
     depends_on:
     - mingran-mysql
     restart: always

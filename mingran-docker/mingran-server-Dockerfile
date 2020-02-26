@@ -3,3 +3,8 @@ FROM gradle:5.4-jdk8-alpine AS build
 MAINTAINER zzzzbw "zzzzbw@gmail.com"
 
 ENV LANG C.UTF-8
+
+COPY ./mingran-server .
+
+CMD gradle clean build -Dspring.profiles.active=docker
+ENTRYPOINT java -jar build/libs/mingran-server-*.jar
