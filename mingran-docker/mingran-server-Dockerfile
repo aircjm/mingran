@@ -1,14 +1,9 @@
-# Start with a base image containing Java runtime
-FROM gradle:jdk8-alpine as builder
-WORKDIR /usr/src/app
+FROM openjdk:8-alpine as build
+WORKDIR /app
 COPY ./mingran-server .
-RUN ls
-RUN pwd
-
-USER root                # This changes default user to root
-RUN chown -R gradle /usr/src/app # This changes ownership of folder
-USER gradle              # This changes the user back to the default user "gradle"
-
-RUN ./gradlew build --stacktrace
-
 RUN ls -R
+RUN pwd
+RUN ./gradlew build || return 0
+COPY . /app
+RUN ls -R
+RUN ./gradlew build -x test
