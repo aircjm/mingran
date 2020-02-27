@@ -1,12 +1,11 @@
-FROM openjdk:8-jdk-slim
+FROM openjdk:8-jdk-alpine AS build
+WORKDIR /app
 
-RUN mkdir -p /app/java
-WORKDIR /app/java
+COPY build.gradle settings.gradle gradlew ./
+COPY gradle ./gradle
+RUN ./gradlew --version
+  # Download dependencies layer
+RUN ./gradlew build 2>/dev/null || return 0
 
-COPY ./mingran-server .
-
-  #build
-  #RUN ./gradlew build
-RUN ./gradlew build -x test
-
-RUN ls build/libs
+COPY . .
+RUN ./gradlew build
