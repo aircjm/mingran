@@ -3,6 +3,12 @@ FROM gradle:jdk8-alpine as builder
 WORKDIR /usr/src/app
 COPY ./mingran-server .
 RUN ls
-chmod +x gradlew
-RUN ./gradlew build
+RUN pwd
+
+USER root                # This changes default user to root
+RUN chown -R gradle /usr/src/app # This changes ownership of folder
+USER gradle              # This changes the user back to the default user "gradle"
+
+RUN ./gradlew build --stacktrace
+
 RUN ls -R
