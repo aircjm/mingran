@@ -2,8 +2,6 @@
 FROM gradle:jdk8-alpine as builder
 WORKDIR /usr/src/app
 COPY ./mingran-server .
-RUN gradle -version
 RUN ls
-RUN java -version
-RUN sh -c 'gradle build'
-RUN tree -a
+RUN sh -c './gradlew build'
+RUN ls -R
