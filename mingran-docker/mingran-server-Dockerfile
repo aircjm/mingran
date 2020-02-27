@@ -1,15 +1,12 @@
-FROM openjdk:8-jdk-alpine
+FROM openjdk:8-jdk-slim
 
-ENV APP_HOME=/usr/app/
+RUN mkdir -p /app/java
+WORKDIR /app/java
 
-WORKDIR $APP_HOME
+COPY ./mingran-server .
 
-COPY build.gradle settings.gradle gradlew $APP_HOME
-COPY gradle $APP_HOME/gradle
-RUN ./gradlew build || return 0
+  #build
+  #RUN ./gradlew build
+RUN ./gradlew build -x test
 
-COPY . .
-
-RUN ./gradlew build
-
-CMD ./gradlew bootRun
+RUN ls build/libs
