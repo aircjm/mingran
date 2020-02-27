@@ -1,29 +1,9 @@
 # Start with a base image containing Java runtime
-FROM gradle:jdk10 as builder
-
-
+FROM gradle:jdk8-alpine as builder
 WORKDIR /usr/src/app
 COPY ./mingran-server .
-
+RUN gradle -version
 RUN ls
-RUN pwd
-  # Install the application
-RUN gradle clean build -Dspring.profiles.active=docker
-RUN pwd
-RUN ls -ltr /usr/src/app/build/libs
-
-
-FROM openjdk:10-jre-slim
-ARG APPLICATION_NAME
-ARG VERSION
-
-
-COPY --from=appbuild /usr/src/app/build/libs/${APPLICATION_NAME}-${VERSION}.jar /app/${APPLICATION_NAME}-${VERSION}.jar
-
-WORKDIR /app
-
-ENV APPLICATION_NAME=${APPLICATION_NAME}
-
-ENV VERSION=${VERSION}
-
-ENTRYPOINT java $JAVA_OPTS -jar /app/${APPLICATION_NAME}-${VERSION}.jar
+RUN java -version
+RUN sh -c 'gradle build'
+RUN tree -a
