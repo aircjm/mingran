@@ -1,11 +1,6 @@
 FROM openjdk:8-jdk-alpine AS build
 WORKDIR /app
-
-RUN ls
-
 COPY ./mingran-server .
 RUN ls
-RUN chmod a+x gradlew
-RUN ./gradlew --version
-  # Download dependencies layer
+RUN chmod +x *
 RUN ./gradlew build
