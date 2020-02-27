@@ -3,5 +3,6 @@ FROM gradle:jdk8-alpine as builder
 WORKDIR /usr/src/app
 COPY ./mingran-server .
 RUN ls
-RUN sh -c './gradlew build'
+chmod +x gradlew
+RUN ./gradlew build
 RUN ls -R
