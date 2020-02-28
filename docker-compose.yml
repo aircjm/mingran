@@ -49,7 +49,7 @@ services:
     environment:
       TZ: Asia/Shanghai
     command:
-      - ./gradlew bootrun
+      - /app/gradlew bootrun
     volumes:
     - ./mingran-server:/app
     - ~/.m2:/root/.m2
