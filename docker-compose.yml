@@ -47,9 +47,9 @@ services:
       dockerfile: ./mingran-docker/mingran-server-Dockerfile
     working_dir: /app
     environment:
+      TZ: Asia/Shanghai
     command:
       - ./gradlew bootrun
-      TZ: Asia/Shanghai
     volumes:
     - ./mingran-server:/app
     - ~/.m2:/root/.m2
