@@ -1,5 +1,1 @@
-FROM openjdk:8-jdk-alpine AS build
-WORKDIR /app
-COPY ./mingran-server .
-RUN ls
-RUN pwd
+FROM gradle:5.5.1-jdk8 AS build

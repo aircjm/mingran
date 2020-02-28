@@ -48,11 +48,11 @@ services:
     working_dir: /app
     environment:
       TZ: Asia/Shanghai
-    command:
-      - /app/gradlew bootrun
+    command: gradle -Dspring.profiles.active=docker bootrun
     volumes:
     - ./mingran-server:/app
     - ~/.m2:/root/.m2
+    - ~/.gradle:/root/.gradle
     - ~/.mingran/logs/server:/app/logs
     - ~/.mingran/upload:/root/.mingran/upload
     expose:
