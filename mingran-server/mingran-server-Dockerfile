@@ -1,8 +1,1 @@
-FROM gradle:5.5.1-jdk8 AS build
-
-
-WORKDIR /app
-
-COPY . .
-
-RUN chmod a+x gradlew
+FROM openjdk:8u171-jdk-alpine3.8
