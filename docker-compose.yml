@@ -42,13 +42,11 @@ services:
 
   mingran-server:
     container_name: mingran-server
-    build:
-      context: ./
-      dockerfile: ./mingran-docker/mingran-server-Dockerfile
+    image: anapsix/alpine-java:8_jdk_unlimited
     working_dir: /app
     environment:
       TZ: Asia/Shanghai
-    command: gradlew -Dspring.profiles.active=docker bootRun #bash start.sh
+    command: './gradlew -Dspring.profiles.active=docker bootRun'
     volumes:
     - ./mingran-server:/app
     - ~/.m2:/root/.m2
