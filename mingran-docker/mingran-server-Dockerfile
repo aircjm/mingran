@@ -3,7 +3,4 @@ FROM gradle:5.5.1-jdk8 AS build
 
 WORKDIR /app
 
-COPY ./mingran-server .
-
-
-RUN gradle wrapper
+COPY . .
