@@ -42,7 +42,9 @@ services:
 
   mingran-server:
     container_name: mingran-server
-    image: anapsix/alpine-java:8_jdk_unlimited
+    build:
+      context: ./mingran-server
+      dockerfile: mingran-server-Dockerfile
     working_dir: /app
     environment:
       TZ: Asia/Shanghai
