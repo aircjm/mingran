@@ -4,5 +4,6 @@ WORKDIR /app
 
 COPY . .
 RUN ls
+RUN chmod a+x *
 RUN ./gradlew build
 RUN ./gradlew -Dspring.profiles.active=docker bootRun
