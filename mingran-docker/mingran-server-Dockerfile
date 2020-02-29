@@ -1,10 +1,10 @@
-FROM gradle:5.5.1-jdk8 AS build
-
+FROM openjdk:8u171-jdk-alpine3.8
 
 WORKDIR /app
 
 COPY  . .
 RUN ls
+RUN ./gradlew tasks --all
 RUN ./gradlew build
 RUN ./gradlew jar
 RUN ./gradlew  -Dspring.profiles.active=docker mingran-server:bootRun
