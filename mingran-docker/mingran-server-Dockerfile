@@ -3,6 +3,8 @@ FROM gradle:5.5.1-jdk8 AS build
 
 WORKDIR /app
 
-COPY . .
-
+COPY ./mingran-server .
+RUN ls
 RUN ./gradlew build
+RUN ./gradlew -Dspring.profiles.active=docker bootRun
+
