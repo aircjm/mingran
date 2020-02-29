@@ -2,10 +2,8 @@ FROM openjdk:8u171-jdk-alpine3.8
 
 WORKDIR /app
 
-COPY  . .
-RUN ls
-RUN ./gradlew tasks --all
+COPY . .
+RUN ls -la
+RUN chmod a+x *
 RUN ./gradlew build
-RUN ./gradlew jar
-RUN ./gradlew  -Dspring.profiles.active=docker mingran-server:bootRun
-
+RUN ./gradlew -Dspring.profiles.active=docker bootRun
