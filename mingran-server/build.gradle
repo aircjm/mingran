@@ -18,15 +18,10 @@ version = '0.0.1-SNAPSHOT'
 description = 'mingran-server'
 
 configurations {
-    developmentOnly
-    runtimeClasspath {
-        extendsFrom developmentOnly
-    }
     compileOnly {
         extendsFrom annotationProcessor
     }
 }
-
 
 repositories {
     mavenLocal()
