@@ -43,8 +43,8 @@ services:
   mingran-server:
     container_name: mingran-server
     build:
-      context: ./mingran-server
-      dockerfile: mingran-server-Dockerfile
+      context: ./
+      dockerfile: ./mingran-docker/mingran-server-Dockerfile
     working_dir: /app
     environment:
       TZ: Asia/Shanghai
