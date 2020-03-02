@@ -5,4 +5,4 @@ WORKDIR /app
 COPY ./mingran-server .
 RUN chmod a+x *
 
-RUN ./gradlew clean bootRun --args='--spring.profiles.active=docker'
+# RUN ./gradlew clean bootRun --args='--spring.profiles.active=docker'
