@@ -7,5 +7,6 @@ RUN sh gradlew build -x test --no-daemon
 
 RUN ls build/libs/
 RUN mv build/libs/*.jar app.jar
+RUN java --version
   #启动容器之后，默认的运行命令
 ENTRYPOINT ["java","-jar","app.jar"]
