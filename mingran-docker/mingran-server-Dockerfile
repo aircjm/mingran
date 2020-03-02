@@ -6,6 +6,7 @@ WORKDIR /app
 
 COPY ./mingran-server /app/
 RUN sh gradlew build
+RUN pwd
 ENV JAVA_OPTS=""
 RUN ls build
 RUN ls build/libs
