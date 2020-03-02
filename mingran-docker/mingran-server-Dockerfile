@@ -1,4 +1,4 @@
-FROM openjdk:8u171-jdk-alpine3.8 AS build
+FROM 6.2.1-jdk8
 
 WORKDIR /app
 
@@ -9,6 +9,6 @@ RUN ls -la build/libs/
 RUN mv build/libs/*.jar app.jar
 RUN java -version
 RUN ls -lh
-RUN chmod a+x app.jar
+RUN chmod 777 app.jar
   #启动容器之后，默认的运行命令
 ENTRYPOINT ["java","-jar","app.jar"]
