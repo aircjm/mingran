@@ -6,9 +6,5 @@ WORKDIR /app
 
 COPY ./mingran-server /app/
 RUN sh gradlew build
-RUN pwd
-ENV JAVA_OPTS=""
-RUN ls build
-RUN ls build/libs
 
-ENTRYPOINT [ "sh", "-c", "java $JAVA_OPTS -Dspring.profiles.active=docker -Xms1024m -jar 'build/libs/mingran-server-0.0.1-SNAPSHOT.jar'" ]
+CMD ["./gradlew","bootRun"]
