@@ -48,7 +48,7 @@ services:
     working_dir: /app
     environment:
       TZ: Asia/Shanghai
-    command: "chmod a+x * && ./gradlew clean bootRun --args='--spring.profiles.active=docker'"
+#    command: "chmod a+x * && ./gradlew clean bootRun --args='--spring.profiles.active=docker'"
     volumes:
     - ./mingran-server:/app
     - ~/.m2:/root/.m2

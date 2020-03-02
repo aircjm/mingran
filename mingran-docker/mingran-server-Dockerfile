@@ -1,8 +1,10 @@
 FROM openjdk:8u171-jdk-alpine3.8
 
+VOLUME /tmp
+RUN mkdir /app
 WORKDIR /app
 
-COPY ./mingran-server .
-RUN chmod a+x *
-
-# RUN ./gradlew clean bootRun --args='--spring.profiles.active=docker'
+COPY ./mingran-server /app/
+RUN sh gradlew build
+ENV JAVA_OPTS=""
+ENTRYPOINT [ "sh", "-c", "java $JAVA_OPTS -Dspring.profiles.active=docker -Xms1024m -jar build/libs/mingran-server-0.0.1-SNAPSHOT.jar" ]
