@@ -1,10 +1,22 @@
-FROM openjdk:8u171-jdk-alpine3.8
+FROM openjdk:8u171-jdk-alpine3.8 AS build
 
 VOLUME /tmp
 RUN mkdir /app
 WORKDIR /app
 
 COPY ./mingran-server /app/
-RUN sh gradlew build
+RUN sh gradlew build -x test --no-daemon
 
-CMD ["./gradlew","bootRun"]
+ENV JAVA_OPTS=""
+
+FROM openjdk:8-jre-slim
+
+EXPOSE 8085
+
+RUN mkdir /app
+
+COPY --from=build /app/build/libs/*.jar /app/spring-boot-application.jar
+
+ENTRYPOINT ["java", "-XX:+UnlockExperimentalVMOptions", "-XX:+UseCGroupMemoryLimitForHeap", "-Djava.security.egd=file:/dev/./urandom","-Dspring.profiles.active=docker","-jar","/app/spring-boot-application.jar"]
+
+
