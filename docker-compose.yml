@@ -1,0 +1,72 @@
+version: '3'
+services:
+  mingran-nginx:
+    container_name: mingran-nginx
+    build:
+      context: ./
+      dockerfile: ./mingran-docker/mingran-nginx/nginx-Dockerfile
+    environment:
+      TZ: Asia/Shanghai
+    ports:
+    - "80:80"
+    volumes:
+    - ~/.mingran/logs/nginx:/var/log/nginx
+    depends_on:
+    - mingran-server
+    - mingran-admin
+
+  mingran-mysql:
+    container_name: mingran-mysql
+    build:
+      context: ./
+      dockerfile: ./mingran-docker/mingran-mysql/mingran-mysql-Dockerfile
+    environment:
+      MYSQL_DATABASE: mingran
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_ROOT_HOST: '%'
+      TZ: Asia/Shanghai
+    expose:
+    - "3306"
+    volumes:
+    - ~/.mingran/mysql/mysql_data:/var/lib/mysql
+    restart: always
+
+  mingran-redis:
+    container_name: mingran-redis
+    build:
+      context: ./
+      dockerfile: ./mingran-docker/mingran-redis-Dockerfile
+    environment:
+      TZ: Asia/Shanghai
+    restart: always
+
+  mingran-server:
+    container_name: mingran-server
+    build:
+      context: ./
+      dockerfile: ./mingran-docker/mingran-server-Dockerfile
+    working_dir: /app
+    environment:
+      TZ: Asia/Shanghai
+    command: "gradle clean bootRun --args='--spring.profiles.active=docker'"
+    volumes:
+    - ./mingran-server:/app
+    - ~/.m2:/root/.m2
+    - ~/.gradle:/root/.gradle
+    - ~/.mingran/logs/server:/app/logs
+    - ~/.mingran/upload:/root/.mingran/upload
+    expose:
+    - "8085"
+    depends_on:
+    - mingran-mysql
+    restart: always
+
+  mingran-admin:
+    container_name: mingran-admin
+    build:
+      context: ./
+      dockerfile: ./mingran-docker/mingran-admin/mingran-admin-Dockerfile
+    environment:
+      TZ: Asia/Shanghai
+    expose:
+    - "3001"

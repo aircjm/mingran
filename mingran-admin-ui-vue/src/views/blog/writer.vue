@@ -47,21 +47,10 @@
   </div>
 </template>
 <script>
-  import prism from 'markdown-it-prism'
-  // 引入需要高亮的语言：java、kotlin、c、cpp、python、bash、lua、vim、yaml、docker、git、json
-  import 'prismjs/components/prism-java'
-  import 'prismjs/components/prism-kotlin'
-  import 'prismjs/components/prism-c'
-  import 'prismjs/components/prism-cpp'
-  import 'prismjs/components/prism-python'
-  import 'prismjs/components/prism-bash'
-  import 'prismjs/components/prism-lua'
-  import 'prismjs/components/prism-vim'
-  import 'prismjs/components/prism-yaml'
-  import 'prismjs/components/prism-docker'
-  import 'prismjs/components/prism-git'
-  import 'prismjs/components/prism-json'
-  import 'prismjs/components/prism-sql'
+  import marked from 'marked'
+  import hljs from "highlight.js";
+  import 'highlight.js/styles/monokai-sublime.css';
+
   import {pageSave} from "@/api/blog/blog";
 
   export default {
@@ -377,19 +366,24 @@
           }
         }
       },
-      // 将markdown解析为html，并使用prism高亮代码
+      // 将markdown解析为html
       getHtml () {
-        var md = require('markdown-it')({
-          linkify: true // 使类似URL的字符串链接化
-        })
-        var emoji = require('markdown-it-emoji') // 解析表情符号
-        var anchor = require('markdown-it-anchor').default // 给标题添加id
-        md.use(prism, {
-          defaultLanguage: 'bash' // 如果没有指定语言，就默认为bash
-        })
-        md.use(anchor)
-        md.use(emoji)
-        this.contentHtml = md.render(this.content)
+        marked.setOptions({
+            renderer: new marked.Renderer(),
+            highlight: function(code) {
+              return hljs.highlightAuto(code).value;
+            },
+            pedantic: false,
+            gfm: true,
+            tables: true,
+            breaks: false,
+            sanitize: false,
+            smartLists: true,
+            smartypants: false,
+            xhtml: false
+          }
+        );
+        this.contentHtml = marked(this.code)
       },
       // 完成文章发布
       finshPublish () {
