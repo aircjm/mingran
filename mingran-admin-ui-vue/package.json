@@ -1,7 +1,7 @@
 {
   "name": "mingran-admin",
   "version": "1.0.0",
-  "description": "燃管理系统",
+  "description": "燃系统",
   "author": "ming",
   "license": "MIT",
   "scripts": {
@@ -37,7 +37,10 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://gitee.com/y_project/RuoYi-Vue.git"
+    "url": "https://github.com/aircjm/mingran.git"
+  },
+  "bugs": {
+    "url": "https://github.com/aircjm/mingran/issues"
   },
   "dependencies": {
     "@riophae/vue-treeselect": "0.4.0",
