@@ -1,9 +1,10 @@
 FROM gradle:6.2.1-jdk8
-#
-#WORKDIR /app
-#
-#COPY ./mingran-server /app/
-#RUN sh gradlew build -x test --no-daemon
+
+WORKDIR /app
+
+COPY ./mingran-server /app/
+RUN ls
+RUN sh gradlew build -x test --no-daemon
 #
 #RUN ls -la build/libs/
 #RUN mv build/libs/*.jar app.jar
