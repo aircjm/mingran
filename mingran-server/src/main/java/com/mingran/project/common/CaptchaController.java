@@ -22,6 +22,8 @@ import java.util.concurrent.TimeUnit;
  */
 @RestController
 public class CaptchaController {
+
+
     @Autowired
     private RedisCache redisCache;
 
